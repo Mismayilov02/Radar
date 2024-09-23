@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="-30dp"
+        android:layout_marginTop="-60dp"
+        android:layout_marginEnd="-30dp"
+        android:layout_marginBottom="-50dp"
+        android:alpha="0.3"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/backround_img" />
+
+    <ImageView
+        android:id="@+id/mImgRadarBack"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/ic_radar"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.14999998" />
+
+    <com.mismayilov.radar.RadarViewC
+        android:id="@+id/mRadarCustom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"
+        app:layout_constraintBottom_toBottomOf="@+id/mImgRadarBack"
+        app:layout_constraintEnd_toEndOf="@+id/mImgRadarBack"
+        app:layout_constraintStart_toStartOf="@+id/mImgRadarBack"
+        app:layout_constraintTop_toTopOf="@+id/mImgRadarBack">
+
+    </com.mismayilov.radar.RadarViewC>
+
+    <ImageButton
+        android:id="@+id/btnFront"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:tint="#10A813"
+        app:layout_constraintBottom_toTopOf="@+id/btnStop"
+        app:layout_constraintEnd_toEndOf="@+id/btnStop"
+        app:layout_constraintStart_toStartOf="@+id/btnStop"
+        app:srcCompat="@drawable/arrow" />
+
+    <ImageButton
+        android:id="@+id/btnRight"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:background="@android:color/transparent"
+        android:rotation="90"
+        android:scaleType="fitXY"
+        android:tint="#10A813"
+        app:layout_constraintBottom_toBottomOf="@+id/btnStop"
+        app:layout_constraintStart_toEndOf="@+id/btnStop"
+        app:layout_constraintTop_toTopOf="@+id/btnStop"
+        app:srcCompat="@drawable/arrow" />
+
+    <ImageButton
+        android:id="@+id/btnLeft"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        android:rotation="-90"
+        android:scaleType="fitXY"
+        android:tint="#10A813"
+        app:layout_constraintBottom_toBottomOf="@+id/btnStop"
+        app:layout_constraintEnd_toStartOf="@+id/btnStop"
+        app:layout_constraintTop_toTopOf="@+id/btnStop"
+        app:srcCompat="@drawable/arrow" />
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        android:rotation="180"
+        android:scaleType="fitXY"
+        android:tint="#10A813"
+        app:layout_constraintEnd_toEndOf="@+id/btnStop"
+        app:layout_constraintStart_toStartOf="@+id/btnStop"
+        app:layout_constraintTop_toBottomOf="@+id/btnStop"
+        app:srcCompat="@drawable/arrow" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/myConstraint"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="-80dp"
+        android:layout_marginTop="-85dp"
+        android:layout_marginEnd="-80dp"
+        android:layout_marginBottom="-85dp"
+        android:paddingStart="120dp"
+        android:rotation="-45"
+        app:layout_constraintBottom_toBottomOf="@+id/mRadarCustom"
+        app:layout_constraintEnd_toEndOf="@+id/mRadarCustom"
+        app:layout_constraintStart_toStartOf="@+id/mRadarCustom"
+        app:layout_constraintTop_toTopOf="@+id/mRadarCustom">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/btnStop"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="120dp"
+        android:background="@android:color/transparent"
+        android:padding="10dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
