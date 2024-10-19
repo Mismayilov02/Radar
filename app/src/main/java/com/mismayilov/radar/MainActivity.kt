@@ -4,20 +4,13 @@ import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.WindowManager
 import android.view.animation.AnimationUtils
-import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.airbnb.lottie.LottieAnimationView
 import com.mismayilov.radar.databinding.ActivityMainBinding
@@ -27,6 +20,11 @@ import java.io.OutputStream
 import java.util.UUID
 import kotlin.math.roundToInt
 
+
+/**
+ * @author Muhammed Ismayilov
+ * @date 2024-03-01
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var bluetoothAdapter: BluetoothAdapter
@@ -45,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         animateRadar()
-        loadTempData()
+        loadData()
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
         if (bluetoothAdapter == null) return
@@ -108,6 +106,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Listen for data from Bluetooth device
+     * It reads the data from the input stream and sends it to the loadData method.
+     * If there is an error, it logs the error and breaks the loop.
+     */
     private fun listenForData() {
         Thread {
             while (true) {
@@ -122,7 +125,7 @@ class MainActivity : AppCompatActivity() {
                             Log.e("TAG", list[0] ?: "No data")
                             try {
                                 if (list[0].contains("null")) return@post
-                                loadTempData(list[0].toDouble(), list[1].toDouble())
+                                loadData(list[0].toDouble(), list[1].toDouble())
                             } catch (e: Exception) {
                                 Log.e("TAG", "Error parsing data", e)
                             }
@@ -137,10 +140,16 @@ class MainActivity : AppCompatActivity() {
         }.start()
     }
 
+
+    /**
+     * Send data to bluetooth device
+     * @param data String
+     */
+
     private fun sendData(data: String) {
         val msgBuffer = data.toByteArray()
         try {
-            outputStream?.write(msgBuffer)
+            outputStream.write(msgBuffer)
         } catch (e: IOException) {
             Log.e("TAG", "Error sending data", e)
         }
@@ -162,14 +171,21 @@ class MainActivity : AppCompatActivity() {
         mImgRadarBack.startAnimation(rotation)
     }
 
-    private fun loadTempData(distance: Double? = null, rotation: Double = 0.0) {
+
+    /**
+     * Load data to radar. It calculates the distance and degrees received via Bluetooth and displays them on the radar screen.
+     * If the distance is null, it does not display anything.
+     * @param distance Double?
+     * @param rotation Double
+     */
+    private fun loadData(distance: Double? = null, rotation: Double = 0.0) {
         binding.myConstraint.removeAllViews()
         if (distance == null) return
-        val lotieAnimation = LottieAnimationView(this)
-        lotieAnimation.setAnimation(R.raw.radar_object)
-        lotieAnimation.loop(true)
-        lotieAnimation.playAnimation()
-        lotieAnimation.layoutParams = ConstraintLayout.LayoutParams(
+        val lottieAnimation = LottieAnimationView(this)
+        lottieAnimation.setAnimation(R.raw.radar_object)
+        lottieAnimation.loop(true)
+        lottieAnimation.playAnimation()
+        lottieAnimation.layoutParams = ConstraintLayout.LayoutParams(
             500,
             500
         ).apply {
@@ -178,7 +194,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.myConstraint.rotation = 100- if (rotation <180) rotation.toFloat() else (360-rotation).toFloat()
-        binding.myConstraint.addView(lotieAnimation)
+        binding.myConstraint.addView(lottieAnimation)
 
     }
 }

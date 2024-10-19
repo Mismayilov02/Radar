@@ -10,6 +10,13 @@ import androidx.constraintlayout.widget.ConstraintSet;
 
 import java.util.ArrayList;
 
+
+/**
+ * @author Muhammed Ismayilov
+ * @date 2024-03-01
+ */
+
+
 public class RadarViewC extends ConstraintLayout {
     private LatLongCs mLatLongCenter = null;
     private Context mContext;
@@ -19,7 +26,7 @@ public class RadarViewC extends ConstraintLayout {
     private View mCenterView;
     RadarViewC mLayout;
     int idCenterLayout = 5001;
-    private IRadarCallBack radarCallBack;
+//    private IRadarCallBack radarCallBack;
 
     public void setupData(double mRadarDistance, ArrayList<ObjectModel> mDataSets, LatLongCs mLatLongCenter, View centerView) {
         this.mRadarDistance = mRadarDistance;
@@ -89,14 +96,6 @@ public class RadarViewC extends ConstraintLayout {
             View viewD = mDataSets.get(position).getmView();
             viewD.setId(position);
             mLayout.addView(viewD);
-            final int finalPosition = position;
-            viewD.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (radarCallBack != null)
-                        radarCallBack.onViewClick(mDataSets.get(finalPosition), mDataSets.get(finalPosition).getmView());
-                }
-            });
             ConstraintSet constraintSet = new ConstraintSet();
             constraintSet.clone(mLayout);
 
@@ -173,13 +172,5 @@ public class RadarViewC extends ConstraintLayout {
         distance = Math.pow(distance, 2) + Math.pow(height, 2);
 
         return Math.sqrt(distance);
-    }
-
-    public void setUpCallBack(IRadarCallBack radarCallBack) {
-        this.radarCallBack = radarCallBack;
-    }
-
-    public interface IRadarCallBack {
-        void onViewClick(Object objectModel, View view);
     }
 }
